@@ -2,7 +2,7 @@ name: "Website generator"
 on:
   push:
     branches:
-      - master
+      - docs
 jobs:
   build-web:
     name: "Build website"
