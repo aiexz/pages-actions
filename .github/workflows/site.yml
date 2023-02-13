@@ -1,4 +1,4 @@
-name: "Website generator"
+name: Website generator
 on:
   push:
     branches:
