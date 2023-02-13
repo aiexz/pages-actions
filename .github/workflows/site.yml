@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
+      - name: "Checkout docs branch"
+        run: git checkout docs
       - name: "Run script"
         run: python main.py
       - name: Push changes
@@ -27,5 +29,4 @@ jobs:
         with:
           branch: docs
           commit_message: "Update website"
-          push_options: '--force' # hope I don't break anything
 
