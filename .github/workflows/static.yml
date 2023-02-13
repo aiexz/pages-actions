@@ -2,11 +2,12 @@
 name: Deploy static content to Pages
 
 on:
-  workflow_run: # Triggered when a workflow run completes
-    workflows: [ "Website generator" ]
-    branches: [ main ]
-    types:
-      - completed
+    push:
+        branches:
+        - master
+        paths:
+          - docs/**
+    workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
