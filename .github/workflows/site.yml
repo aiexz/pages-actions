@@ -1,0 +1,30 @@
+name: "Website generator"
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-web:
+    name: "Build website"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GH_PAT }}
+      - name: "Run python script"
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: "Run script"
+        run: python generate.py
+      - name: "Commit changes"
+        uses: EndBug/add-and-commit@v7
+        with:
+          author_name: "GitHub Actions"
+          author_email: ""
+          message: "Update website"
+          add: "docs"
+          push: true
+          token: ${{ secrets.GH_PAT }}
