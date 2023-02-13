@@ -19,13 +19,14 @@ jobs:
           python-version: 3.8
       - name: "Run script"
         run: python main.py
-      - name: "Commit changes"
-        uses: EndBug/add-and-commit@v7
+      - name: Commit files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Generate docs"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          author_name: "GitHub Actions"
-          message: "Update website"
-          add: "docs"
-          push: true
-          token: ${{ secrets.GH_PAT }}
-          new_branch: "docs"
+          github_token: ${{ secrets.GH_PAT }}
+          branch: docs
 
