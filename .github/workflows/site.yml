@@ -26,4 +26,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: docs
+          commit_message: "Update website"
+          push_options: '--force' # hope I don't break anything
 
