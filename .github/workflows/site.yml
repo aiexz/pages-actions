@@ -9,9 +9,20 @@ jobs:
   build-web:
     name: "Build website"
     runs-on: ubuntu-latest
+    environment:
+      name: "GitHub Actions"
     permissions:
       contents: write
     steps:
+      # check author of commit
+      - name: "Check author"
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const author = context.payload.head_commit.author.username
+            if (author == "github-actions[bot]") {
+              core.setFailed("Commit author is GitHub Actions")
+            }
       - name: "Checkout"
         uses: actions/checkout@v2
         with:
@@ -22,16 +33,10 @@ jobs:
           python-version: 3.8
       - name: "Run script"
         run: python main.py
-      - name: "Checkout docs branch"
-        run: |
-          git stash
-          git checkout docs
-          git stash pop
-          git add .
-          git commit -m "Update website"
       - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: docs
+          commit_author: "GitHub Actions [bot]"
           commit_message: "Update website"
 
