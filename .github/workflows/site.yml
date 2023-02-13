@@ -18,13 +18,13 @@ jobs:
         with:
           python-version: 3.8
       - name: "Run script"
-        run: python generate.py
+        run: python main.py
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v7
         with:
           author_name: "GitHub Actions"
-          author_email: ""
           message: "Update website"
           add: "docs"
           push: true
           token: ${{ secrets.GH_PAT }}
+
